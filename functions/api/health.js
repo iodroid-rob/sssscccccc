@@ -2,7 +2,7 @@ import { jsonResponse } from './_security.js';
 
 export async function onRequestGet(context) {
   const { env } = context;
-  const hasGemini = Boolean(env.GEMINI_API_KEY || 'AIzaSyAq_lBzTYWR505VSkFQVtZoj3-4RNIXSV0');
+  const hasGemini = Boolean(env.GEMINI_API_KEY);
   const hasGroq = Boolean(env.GROQ_API_KEY);
 
   return jsonResponse({

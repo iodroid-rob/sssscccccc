@@ -49,7 +49,7 @@ async function callAiBatchCloudflare({
   sanitizedInstructions
 }) {
   const groqKey = env.GROQ_API_KEY;
-  const geminiKey = env.GEMINI_API_KEY || 'AIzaSyAq_lBzTYWR505VSkFQVtZoj3-4RNIXSV0';
+  const geminiKey = env.GEMINI_API_KEY;
 
   const systemPrompt = `You are a professional educational examination paper generator for ${classLevel}.
 You MUST generate questions in strict JSON format:
