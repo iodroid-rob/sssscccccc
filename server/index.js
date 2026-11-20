@@ -213,7 +213,7 @@ Keep question statements clear and answers concise.`;
 
   for (const candidate of modelCandidates) {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 35000);
+    const timer = setTimeout(() => controller.abort(), 75000);
 
     try {
       const url = `https://generativelanguage.googleapis.com/v1beta/models/${candidate}:generateContent?key=${geminiKey}`;
@@ -223,6 +223,16 @@ Keep question statements clear and answers concise.`;
         body: JSON.stringify({
           contents: [{ parts: [{ text: `${systemPrompt}\n\n${userPrompt}` }] }],
           generationConfig: {
+            temperature: 0.35,
+            responseMimeType: 'application/json',
+            maxOutputTokens: 8192,
+            thinkingConfig: {
+              thinkingBudget: 0
+            }
+          }
+        }),
+        signal: controller.signal
+      });
             temperature: 0.35,
             responseMimeType: 'application/json',
             maxOutputTokens: 8192

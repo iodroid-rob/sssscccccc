@@ -369,7 +369,7 @@ Keep question statements clear and answers concise.`;
 
   for (const targetModel of Array.from(new Set(candidateModels))) {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 35000);
+    const timeout = setTimeout(() => controller.abort(), 75000);
 
     try {
       const url = `https://generativelanguage.googleapis.com/v1beta/models/${targetModel}:generateContent?key=${key}`;
@@ -381,7 +381,10 @@ Keep question statements clear and answers concise.`;
           generationConfig: {
             temperature: 0.35,
             responseMimeType: 'application/json',
-            maxOutputTokens: 8192
+            maxOutputTokens: 8192,
+            thinkingConfig: {
+              thinkingBudget: 0
+            }
           }
         }),
         signal: controller.signal
