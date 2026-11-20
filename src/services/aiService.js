@@ -450,21 +450,20 @@ export async function generateFullPaperWithAi({
       return result.questions;
     }
 
-    // If server actively returned a 400 (e.g. Prompt Injection) or 401 (Invalid License) or 429 (Rate Limit), throw it!
-    if (result.error) {
+    if (result && result.error) {
       throw new Error(result.error);
     }
+
+    if (!response.ok) {
+      throw new Error(`Server returned error status ${response.status}`);
+    }
   } catch (serverErr) {
-    // If it's a security/rate-limit error from the server, do not mask it
-    if (
-      serverErr.message.includes('Security Warning') ||
-      serverErr.message.includes('Unauthorized') ||
-      serverErr.message.includes('Rate Limit')
-    ) {
+    // If it's a server-side error or validation error, re-throw it so the user sees the real message!
+    if (serverErr && serverErr.message && !serverErr.message.includes('Failed to fetch')) {
       throw serverErr;
     }
 
-    console.warn('Backend proxy unavailable or failed. Checking standalone client fallback...', serverErr.message);
+    console.warn('Backend proxy network connection failed. Checking standalone client fallback...', serverErr.message);
   }
 
   // 2. FALLBACK STANDALONE PATH: If backend proxy is not accessible, use local key
