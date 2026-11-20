@@ -113,7 +113,7 @@ export function saveStoredApiKey(key) {
     if (key.trim().startsWith('gsk_')) {
       saveStoredProvider(PROVIDERS.GROQ);
       saveStoredModel('llama-3.3-70b-versatile');
-    } else if (key.trim().startsWith('AIza')) {
+    } else if (key.trim().startsWith('AIza') || key.trim().startsWith('AQ.')) {
       saveStoredProvider(PROVIDERS.GEMINI);
       saveStoredModel('gemini-2.5-flash');
     }
