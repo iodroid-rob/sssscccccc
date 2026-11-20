@@ -184,7 +184,8 @@ export async function onRequestPost(context) {
 
     // School token check
     const schoolToken = request.headers.get('x-school-token');
-    const school = validateSchoolLicense(schoolToken, env.ALLOWED_SCHOOL_TOKENS);
+    const allowedTokens = env.ALLOWED_SCHOOL_TOKENS || env.ALLOWED_SCHOOL_TOK || '';
+    const school = validateSchoolLicense(schoolToken, allowedTokens);
 
     if (!school) {
       return jsonResponse({

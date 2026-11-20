@@ -10,7 +10,8 @@ export async function onRequestPost(context) {
       return jsonResponse({ success: false, error: 'License token is required' }, 400);
     }
 
-    const school = validateSchoolLicense(licenseToken, env.ALLOWED_SCHOOL_TOKENS);
+    const allowedTokens = env.ALLOWED_SCHOOL_TOKENS || env.ALLOWED_SCHOOL_TOK || '';
+    const school = validateSchoolLicense(licenseToken, allowedTokens);
     if (!school) {
       return jsonResponse({
         success: false,
