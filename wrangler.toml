@@ -1,0 +1,7 @@
+name = "examcraft"
+compatibility_date = "2026-11-20"
+pages_build_output_dir = "./dist"
+
+[vars]
+NODE_ENV = "production"
+ALLOWED_SCHOOL_TOKENS = "SCH-DPS-2026-X9A,SCH-DAV-2026-B4Z,SCH-STX-2026-M8K,SCH-KV-2026-Q1R,SCH-DEMO-2026,SCH-DEV-MASTER-2026"
